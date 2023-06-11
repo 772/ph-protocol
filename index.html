@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>ph-value-chart</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<style>html{margin:2em;}</style>
+</head>
+<body>
+<h1>ph-value-chart (only a concept)</h1>
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+<input type="file" id="docpicker" accept=".jpg,.png,.jpeg" />
+<h2>Instructions</h2>
+<ul>
+<li>Select an photo of your ph value. The color must be in the absolute center of the image.</li>
+<li>This website will automatically translate the hexadecimal color in the center of the photo to the ph value and put it together with a timestamp.</li>
+<li>Save the hyperlink since all data is stored in it. Nothing will be uploaded on the server.</li>
+</ul>
+<script>
+const DATA_COUNT = 12;
+const labels = [];
+for (let i = 0; i < DATA_COUNT; ++i) {
+  labels.push(i.toString());
+}
+const datapoints = [0, 7, 7, 8, 5, 5, 6, 7, 6, 7, 7, 7, 14];
+const data = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'ph value',
+      data: datapoints,
+      cubicInterpolationMode: 'monotone',
+    }
+  ]
+};
+const options = {
+  scales: {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: 'Value'
+      }
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: 'Value'
+      },
+      suggestedMin: 0,
+      suggestedMax: 14
+    }
+  }
+};
+const myChart = new Chart("myChart", {
+  type: "line",
+  data: data,
+  options: options
+});
+</script>
+</body>
+</html>
